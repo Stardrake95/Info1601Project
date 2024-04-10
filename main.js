@@ -2,8 +2,7 @@ const description = []
 let track = 0;
 
 async function getUser (user) {
-
-    const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user}&url_embed_safe=true`;
+const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user}`;
 const options = {
 	method: 'GET',
 	headers: {
@@ -15,12 +14,11 @@ const options = {
 try {
 	const response = await fetch(url, options);
 	const result = await response.text();
-	console.log(result);
 } catch (error) {
 	console.error(error);
 }
 
-    createCard (data);
+    createCard (result);
 }
 
 async function loadUser () {
