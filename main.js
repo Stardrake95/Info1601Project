@@ -13,8 +13,15 @@ const firebaseApp = initializeApp ({
 
 const db = getFirestore(firebaseApp);
 
+db.collection('users').get().then(snapshot => {
+    snapshot.docs.forEach(doc => {
+        getUser(doc);
+    })
+})
+
 async function getUser (user) {
-const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user}`;
+
+    const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user.data().uname}&url_embed_safe=true`;
 const options = {
 	method: 'GET',
 	headers: {
@@ -28,22 +35,14 @@ try {
 	const result = await response.text();
 } catch (error) {
 	console.error(error);
-}
+};
 
-    createCard (result);
-}
+    createCard (result, user.data().desc);
+};
 
-async function loadUser () {
 
-    const users = [];
 
-    for (let num of users) {
-
-        getUser (users.num);
-    }
-}
-
-function createCard (user) {
+function createCard (result, desc) {
 
     let html = '';
     let result = document.querySelector('#result');
@@ -51,18 +50,13 @@ function createCard (user) {
     html += `
     <div class="card">
                 <div class="card-image">
-                    <img src="${user.profile_pic_url}" alt="${user.full_name} Image">  
+                    <img src="${result.profile_pic_url}" alt="${result.full_name} Image">  
                 </div>
                 <div class="card-content">
                     <p>${user.full_name}</p>
                     <button type="button" onclick=>Contact</button> 
-                    <p> ${description[track]} </p?
+                    <p> ${desc} </p>
 
                     `;
                     result.innerHTML = html;
-
-                    track ++;
-
 }
-
-    
