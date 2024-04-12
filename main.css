@@ -3,3 +3,24 @@ body{
     background-size: cover;
 }
 
+#contact{
+
+    background-color: gainsboro;
+    margin: auto;
+   width: 50%;
+  border: 3px solid grey;
+  padding: 10px;
+  height: 500px;
+  width:400px
+}
+
+h2 {text-align: center;}
+
+#logo{
+    font-family: Brush Script MT;
+    text-align: center;
+    color: azure;
+    font-size: 100px;
+}
+
+
