@@ -1,6 +1,6 @@
 # Info1601Project
 
-Signup - HTML mostly done. Undecided for JS and havent started CSS.
+Signup - HTML mostly done. Undecided for JS.
 Login - havent started.
 Profile - needs code to display users post
 Contact - needs code to send to trader then done
