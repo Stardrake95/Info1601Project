@@ -27,14 +27,30 @@
             <input type="password" id="password" name="password" minlength="8" required><br>
 
             <input type = "submit" value = "submit">
-            <a href = "index.html">Go Back</a>
+            <a href = "index.html"></a>
 
         </form>
     </main>
 </body>
 
 <script>
-    const form = document.querySelector('#signup');
+    import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+const form = document.querySelector('#signup');
+
+const auth = getAuth(firebaseApp);
+createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+
 
     form.addEventListener('submit', (e) => {
         e.preventdefault();
@@ -43,16 +59,11 @@
             lname: form.lname.value,
             email: form.email.value,
             uname: form.uname.value,
-            password: form.password.value
         });
     } );
     form.fname.value = '';
     form.lname.value = '';
     form.email.value = '';
     form.uname.value = '';
-    form.password.value = '';
-
-        
-    
-</script>
+</script>   
 </html>
