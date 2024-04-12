@@ -6,25 +6,64 @@
     <title>Profile</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<style>
+    body{
+  background-image: url('https://img.freepik.com/free-vector/set-basic-doodle-arrows_78370-1785.jpg')
+    background-size: cover;
+}
+
+h2 {text-align: center;}
+
+#logo{
+    font-family: Brush Script MT;
+    text-align: center;
+    color: azure;
+    font-size: 100px;
+}
+
+main{
+    background-color: antiquewhite;
+   padding-top: 10px;
+
+}
+
+header{
+    padding-bottom: 100px;
+}
+
+
+
+</style>
 <body>
+
+    <div id="logo">
+        WishMatch
+    </div>
+
+
     <header>
-        <h1>Profile</h1>
+        <h2>Profile</h2>
 
-        <img src="" alt="">
-        <p>Username:</p>
+        
+        <p>Username:<span id="username"></span></p>
+        <p>First and Last name:</p>
+        <p>Email:</p>
+
+
     </header>
-    <main>
 
-        <div class="post">
-            <img src="" alt="">
-            
-        </div>
-        <div class="post">
-            <img src="" alt="">
-         
-        </div>
+
+    <main>
+    
 
     </main>
+
+    <script src="main.js"></script>
+    <script>
+        // Call getUser function and display the username
+        document.getElementById("username").innerText = getUser();
+    </script>
 </body>
 </html>
 
