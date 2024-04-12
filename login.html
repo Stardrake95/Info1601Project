@@ -10,9 +10,9 @@
 <body>
     <main>
         <h2>Login</h2>
-        <form>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
+        <form id="login">
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email"><br>
 
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password"><br>
@@ -25,3 +25,23 @@
         </form>
     </main>
 </body>
+    <script>
+        <script>
+    import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+    const form = document.querySelector('#login');
+
+const auth = getAuth(firebaseApp);
+signInWithEmailAndPassword(auth, form.email.value, form.password.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+</script>
+    </script>
+</html>
