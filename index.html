@@ -11,20 +11,66 @@
       
   
 </head>
-<link href = "main.css">
+
+
+<style>
+    body{
+    background-image: url('https://img.freepik.com/free-vector/set-basic-doodle-arrows_78370-1785.jpg');
+      background-size: cover;
+  }
+  
+  #logo{
+      font-family: Brush Script MT;
+      text-align: center;
+      color: azure;
+      font-size: 100px;
+  }
+
+
+  main{
+    background-color: gainsboro;
+    margin: auto;
+   width: 50%;
+  border: 3px solid grey;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  height: 250px;
+  width:400px;
+  text-align: center;
+  padding-top: 35px;
+}
+
+button {
+
+    border-color: grey;
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 15px;
+    margin: 0 auto 10px;
+    cursor: pointer;
+    width:200px;
+}
+
+
+
+</style>
 <body>
-    <nav>
-        <ul class="nav">
-          <button><li><a href="login.html" class = "skip">Log In</a></li>/button>
-          <button><li><a href="signup.html" class = "skip">Sign Up</a></li></button>
-        </ul>
+
+    <h1 id="logo">WishMatch</h1>
+    
+        
+        
 
         <main>
-            <h1>"WishMatch"</h1>
-            <ul id = "tabs">
-                <li><a href = "index.html"></a></li>
-                <li><a href = "Profile.html"></a></li>
-            </ul>
+
+            <button onclick="window.location.href='login.html'" class="skip">Log In</button><br>
+            <button onclick="window.location.href='signup.html'" class="skip">Sign Up</button><br>
+
+           
+          
+            <button onclick="window.location.href='Profile.html'" class="skip">Explore</button><br>
+            
             <section class = "result">
 
             </section>
