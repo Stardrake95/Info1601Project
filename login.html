@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href = "main.css">
+
 </head>
-<link href = "main.css">
 
     <style>
     
@@ -36,9 +37,6 @@ main{
   width:400px
 }
 
-input{
-    padding-bottom: 10px;
-}
 
 </style>
 <body>
@@ -53,16 +51,16 @@ input{
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password"><br>
 
-            <input type="submit" value="Cancel">
-            <a href="login.html">Cancel</a>           
+            
+            <button type="button" onclick="window.location.href='login.html'">Cancel</button>
 
-            <input type="submit" value="Confirm">
-            <a href="Profile.html">Confirm</a>
+            
+            <button type="button" onclick="window.location.href='Profile.html'">Confirm</button>
         </form>
     </main>
 </body>
     <script>
-        <script>
+        
     import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
     const form = document.querySelector('#login');
@@ -79,5 +77,5 @@ signInWithEmailAndPassword(auth, form.email.value, form.password.value)
     const errorMessage = error.message;
   });
 </script>
-    </script>
+
 </html>
