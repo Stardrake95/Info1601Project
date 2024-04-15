@@ -61,13 +61,12 @@ input{
             <label for = "password">Password (8 Characters required): </label><br>
             <input type="password" id="password" name="password" minlength="8" size="50" required><br>
 
-            <button type="button" onclick="window.location.href='login.html'">Submit</button>
+            <input type="submit" onclick="window.location.href='login.html'" value = "Submit">
    </form>
     </main>
 </body>
-
+<script src = "FirebaseConfig.js"></script>
 <script>
-    import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const form = document.querySelector('#signup');
 
