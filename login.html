@@ -55,14 +55,12 @@ main{
             <button type="button" onclick="window.location.href='login.html'">Cancel</button>
 
             
-            <button type="button" onclick="window.location.href='Profile.html'">Confirm</button>
+            <input type="submit" onclick="window.location.href='Profile.html'" value = "Confirm">
         </form>
     </main>
 </body>
+    <script src = "FirebaseConfig.js"></script>
     <script>
-        
-    import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
     const form = document.querySelector('#login');
 
 const auth = getAuth(firebaseApp);
