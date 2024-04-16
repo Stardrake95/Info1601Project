@@ -47,3 +47,30 @@ function createCard (result, desc) {
                     `;
                     result.innerHTML = html;
 }
+
+async function uploadImage() {
+    const url = 'https://upload-image2.p.rapidapi.com/upload';
+    const data = new FormData();
+    
+    const fileInput = document.getElementById('imageInput');
+    const file = fileInput.files[0];
+    data.append('filetoupload', file);
+    
+    const options = {
+        method: 'POST',
+        headers: {
+            'X-RapidAPI-Key': 'fa0b15caf9msh00aa48e116e37ecp1d3845jsn8b3b4d19c837',
+            'X-RapidAPI-Host': 'upload-image2.p.rapidapi.com'
+        },
+        body: data
+    };
+    
+    try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        console.log(result);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
