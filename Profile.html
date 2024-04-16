@@ -9,9 +9,9 @@
 
 <style>
 
+
 main{
     background-color: antiquewhite;
-   padding-top: 10px;
 
 }
 
@@ -51,19 +51,23 @@ header{
         <p>Email:</p>
 
 
+        <label for="imageInput">Post</label>
+        <input type="file" id="imageInput">
+       <button onclick="uploadImage()">Upload Image</button>
+
+
+
     </header>
 
 
     <main>
-        <div class="grid-container" id="posts-container"></div>
+
+        <img id="uploadedImage" src="" alt="Uploaded Image">
+
 
     </main>
 
     <script src="main.js"></script>
-    <script>
 
-        document.getElementById("username").innerText = getUser();
-    </script>
 </body>
 </html>
-
