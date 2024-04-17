@@ -25,7 +25,16 @@ p{
 #imageContainer{
     padding:10px;
 }
+h1{
+    text-align: center;
+}
 
+#links{
+    background-color: aliceblue;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
 </style>
 
 <body>
@@ -34,7 +43,11 @@ p{
     </div>
 
     <header>
-        <h2>Profile</h2>
+        <h1>Profile</h1>
+        <div id="links"> 
+    <input type="submit" onclick="window.location.href='explore.html'" value = "Explore">
+    <input type="submit" onclick="window.location.href='Profile.html'" value = "Profile">
+</div>
         <p>Username:<span id="username"></span></p>
         <p>First and Last name:</p>
         <p>Email:</p>
