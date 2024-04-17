@@ -73,7 +73,7 @@ createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
 
     form.addEventListener('submit', (e) => {
         e.preventdefault();
-        await setDoc(doc(db, "profile", `${form.uname.value}`), {
+        await setDoc(doc(db, "profile", `${form.email.value}`), {
           fname: form.fname.value,
           lname: form.lname.value,
           email: form.email.value,
