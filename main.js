@@ -24,12 +24,12 @@ try {
 	console.error(error);
 };
 
-    createCard (result, user.data().desc);
+    createCard (result);
 };
 
 
 
-function createCard (result, desc) {
+function createCard (result) {
 
     let html = '';
     let result = document.querySelector('#result');
@@ -42,7 +42,7 @@ function createCard (result, desc) {
                 <div class="card-content">
                     <p>${user.full_name}</p>
                     <button type="button" onclick=>Contact</button> 
-                    <p> ${desc} </p>
+                    <p> ${result.biography} </p>
 
                     `;
                     result.innerHTML = html;
