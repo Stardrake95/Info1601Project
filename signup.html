@@ -53,7 +53,8 @@ input{
 </body>
 <script src = "FirebaseConfig.js"></script>
 <script>
-
+import { doc, setDoc } from "firebase/firestore";
+const db = getFirestore(firebaseApp);
 const form = document.querySelector('#signup');
 
 const auth = getAuth(firebaseApp);
@@ -72,13 +73,13 @@ createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
 
     form.addEventListener('submit', (e) => {
         e.preventdefault();
-        db.collection('users').add({
-            fname: form.fname.value,
-            lname: form.lname.value,
-            email: form.email.value,
-            uname: form.uname.value,
+        await setDoc(doc(db, "profile", `${form.uname.value}`), {
+          fname: form.fname.value,
+          lname: form.lname.value,
+          email: form.email.value,
+          uname: form.uname.value   
         });
-    } );
+    });
     form.fname.value = '';
     form.lname.value = '';
     form.email.value = '';
