@@ -48,9 +48,9 @@ h1{
     <input type="submit" onclick="window.location.href='explore.html'" value = "Explore">
     <input type="submit" onclick="window.location.href='Profile.html'" value = "Profile">
 </div>
-        <p>Username:<span id="username"></span></p>
-        <p>First and Last name:</p>
-        <p>Email:</p>
+        <div id = "cred">
+        
+        </div>
 
         <div>
             <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
@@ -72,8 +72,23 @@ h1{
         };
     </script>
     <script src = "FirebaseConfig.js"></script>
-    <script>
+    <script type = "module">
+        import { email } from './login.html';
         const db = getFirestore(firebaseApp);
+        import { doc, getDoc } from "firebase/firestore";
+
+            const docRef = doc(db, "profile", `${email}` );
+            const docSnap = await getDoc(docRef);
+            let html = ' ';
+            let result = document.querySelector(`#cred`);
+
+            html += `
+                <p>Username: ${docSnap.data().uname}</p>
+                <p>First and Last name: ${docSnap.data().fname} + ${docSnap.data().lname}</p>
+                <p>Email: ${email}</p>
+                `
+            result.innerHTML = html;
+
     </script>
 </body>
 </html>
