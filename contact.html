@@ -31,8 +31,12 @@
         <h2>Contact</h2>
     </header>
     <main>
-        <form>
-            
+        <form id = "message">
+
+            <label for = "uname" > Input trader's username: </label>
+            <input type = "text" id = "uname" name = "uname"><br>
+            <label for = "yname" > Input your username: </label>
+            <input type = "text" id = "yname" name = "yname"><br>
             <label for="message">Your message to trader:</label><br>
            <input type="text" id="message" name="message" maxlenght="1000" size="50"><br><br>
         
@@ -42,6 +46,26 @@
 
     </div>
 </body>
+    <script src = "FirebaseConfig.js"></script>
+    <script type = "module">
+        import { collection, addDoc } from "firebase/firestore";
+        const form = document.querySelector('#message');
+        const db = getFirestore(firebaseApp);
+
+        form.addEventListener('submit', (e) => {
+        e.preventdefault();
+        await addDoc(collection(db, "message", `${form.uname.value}`), {
+          sender: form.yname.value,
+          message: form.message.value 
+        });
+    });
+    form.yname.value = '';
+    form.message.value = '';
+    form.uname.value = '';
+
+        
+    </script>
+</html>
 
 
 
