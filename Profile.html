@@ -8,62 +8,55 @@
 </head>
 
 <style>
-
-
-
 header{
     padding-bottom: 100px;
 }
 
-    .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    padding: 20px;
+#post {
+    margin-right: 1250px;
+    padding-top: 15px;
+    color: aliceblue;
+
+}
+p{
+    color: aliceblue;
 }
 
-.post {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
+#imageContainer{
+    padding:10px;
 }
-
-
 
 </style>
-<body>
 
+<body>
     <div id="logo">
         WishMatch
     </div>
 
-
     <header>
         <h2>Profile</h2>
-
-        
         <p>Username:<span id="username"></span></p>
         <p>First and Last name:</p>
         <p>Email:</p>
 
-
-        <label for="imageInput">Post</label>
-        <input type="file" id="imageInput">
-       <button onclick="uploadImage()">Upload Image</button>
-
-
-
+        <div>
+            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+            <button><label for="file" style="cursor: pointer;">Upload Image</label></button>
+            <div id="imageContainer"></div>
+        </div>
     </header>
 
-
-    <main>
-
-        <img id="uploadedImage" src="" alt="Uploaded Image">
-
-
-    </main>
-
-    <script src="main.js"></script>
-
+    <script>
+        var loadFile = function(event) {
+            var imageContainer = document.getElementById('imageContainer');
+            
+            var image = document.createElement('img');
+            image.width = 200;
+            image.height = 200;
+            image.src = URL.createObjectURL(event.target.files[0]);
+            
+            imageContainer.appendChild(image);
+        };
+    </script>
 </body>
 </html>
