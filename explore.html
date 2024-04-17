@@ -28,6 +28,17 @@ header{
     text-align: center;
 }
 
+h1{
+    text-align: center;
+}
+
+#links{
+    background-color: aliceblue;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
 
 
 </style>
@@ -39,7 +50,11 @@ header{
 
 
     <main>
-        <div class="grid-container" id="posts-container"></div>
+        <h1>Explore</h1>
+        <div id="links"> 
+    <input type="submit" onclick="window.location.href='explore.html'" value = "Explore">
+    <input type="submit" onclick="window.location.href='Profile.html'" value = "Profile">
+</div>
 
     </main>
     <script src="FirebaseConfig.js"></script>
