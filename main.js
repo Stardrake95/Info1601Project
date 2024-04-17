@@ -1,14 +1,16 @@
 const db = getFirestore(firebaseApp);
 
-db.collection('users').get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-        getUser(doc);
-    })
+import { getDocs, collection } from "firebase/firestore"; 
+
+const querySnapshot = await getDocs(collection(db, 'users'));
+
+querySnapshot.forEach((doc) => {
+    getUser(doc.data().uname);
 })
 
 async function getUser (user) {
 
-    const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user.data().uname}&url_embed_safe=true`;
+    const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user}&url_embed_safe=true`;
 const options = {
 	method: 'GET',
 	headers: {
