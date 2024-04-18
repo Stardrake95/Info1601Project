@@ -58,7 +58,11 @@ h1{
             <div id="imageContainer"></div>
         </div>
     </header>
+<main>
+    <div id = "messageBox">
 
+    </div>
+</main>
     <script>
         var loadFile = function(event) {
             var imageContainer = document.getElementById('imageContainer');
@@ -75,7 +79,7 @@ h1{
     <script type = "module">
         import { email } from './login.html';
         const db = getFirestore(firebaseApp);
-        import { doc, getDoc } from "firebase/firestore";
+        import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 
             const docRef = doc(db, "profile", `${email}` );
             const docSnap = await getDoc(docRef);
@@ -88,6 +92,34 @@ h1{
                 <p>Email: ${email}</p>
                 `
             result.innerHTML = html;
+
+        async function getMessage () {
+            
+            const messageRef = collection (db, "message", `${docSnap.data().uname}` );
+            const q = await getDocs (messageRef);
+            const message = [];
+            querySnapshot.forEach((doc) => {
+                message.push(doc.data());
+            }
+            renderMessage (message);
+        }
+
+        async function renderMessage (message) {
+
+            let messageBox = document.querySelector("#messageBox")
+            let html = ' ';
+            for (let msg of message) {
+                html += `
+                <div class = "mBox">
+                <p>Sender: ${message.sender}</p>
+                <p>Message: ${message.message}</p>
+                <input type="submit" onclick="window.location.href='contact.html'" value = "Contact">
+                </div>
+                `;
+            }
+            messageBox.innerHTML = html;
+        }
+        getMessage();
 
     </script>
 </body>
