@@ -36,7 +36,7 @@ main{
             <input type="password" id="password" name="password"><br>
 
             
-            <button type="button" onclick="window.location.href='login.html'">Cancel</button>
+            <button type="button" onclick="window.location.href='index.html'">Cancel</button>
 
             
             <input type="submit" onclick="window.location.href='Profile.html'" value = "Confirm">
@@ -45,20 +45,22 @@ main{
 </body>
     <script src = "FirebaseConfig.js"></script>
     <script type = "module">
-    const form = document.querySelector('#login');
+      import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+    
 
 const auth = getAuth(firebaseApp);
-signInWithEmailAndPassword(auth, form.email.value, form.password.value)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-    export const email = form.email.value;
+
+const form = document.getElementById("login");
+form.addEventListener('submit',verifyAuth )
+
+
+async function verifyAuth () {
+
+  signInWithEmailAndPassword(auth, form.email.value, form.password.value)
+
+    
+}
+export const email = form.email.value;
 </script>
 
 </html>

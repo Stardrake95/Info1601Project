@@ -1,16 +1,25 @@
-const db = getFirestore(firebaseApp);
+/* const db = getFirestore(firebaseApp); */
 
-import { getDocs, collection } from "firebase/firestore"; 
+/* import { getDocs, collection } from "firebase/firestore"; 
 
 const querySnapshot = await getDocs(collection(db, 'users'));
 
 querySnapshot.forEach((doc) => {
     getUser(doc.data().uname);
-})
+}) */
+
+async function loaduser () {
+
+    let response = await fetch ('/users.json');
+    let result = await response.text();
+    for (let user of result) {
+        getUser(user);
+    }
+}
 
 async function getUser (user) {
 
-    const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user}&url_embed_safe=true`;
+    const url = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=mrbeast`;
 const options = {
 	method: 'GET',
 	headers: {
@@ -21,34 +30,36 @@ const options = {
 
 try {
 	const response = await fetch(url, options);
-	const result = await response.text();
+	const result = await response.json();
+	console.log(result);
 } catch (error) {
 	console.error(error);
+}
+
+    createCard (result, user.desc);
 };
 
-    createCard (result);
-};
 
 
+function createCard (data, desc ) {
 
-function createCard (result) {
-
-    let html = '';
-    let result = document.querySelector('#result');
+    let html = ' ';
+    let goal = document.querySelector('#result');
 
     html += `
     <div class="card">
                 <div class="card-image">
-                    <img src="${result.profile_pic_url}" alt="${result.full_name} Image">  
+                    <img src="${data.profile_pic_url}" alt="${data.full_name} Image">  
                 </div>
                 <div class="card-content">
-                    <p>${user.full_name}</p>
+                    <p>${data.full_name}</p>
                     <button type="button" onclick=>Contact</button> 
-                    <p> ${result.biography} </p>
+                    <p> ${desc} </p>
 
                     `;
-                    result.innerHTML = html;
+                    goal.innerHTML = html;
 }
+loaduser();
 
 
 
