@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Profi</title>
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -45,8 +45,9 @@ h1{
     <header>
         <h1>Profile</h1>
         <div id="links"> 
-    <input type="submit" onclick="window.location.href='explore.html'" value = "Explore">
+    <input type="submit" onclick="window.location.href='explo.html'" value = "Explore">
     <input type="submit" onclick="window.location.href='Profile.html'" value = "Profile">
+    <input type="submit" onclick="window.location.href='index.html'" value = "Main Page">
 </div>
         <div id = "cred">
         
@@ -59,9 +60,9 @@ h1{
         </div>
     </header>
 <main>
-    <div id = "messageBox">
+    <!-- <div id = "messageBox">
 
-    </div>
+    </div> -->
 </main>
     <script>
         var loadFile = function(event) {
@@ -77,13 +78,28 @@ h1{
     </script>
     <script src = "FirebaseConfig.js"></script>
     <script type = "module">
-        import { email } from './login.html';
+        /* import { email } from './login.html';
         const db = getFirestore(firebaseApp);
         import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 
             const docRef = doc(db, "profile", `${email}` );
-            const docSnap = await getDoc(docRef);
-            let html = ' ';
+            const docSnap = await getDoc(docRef); */
+        
+            
+            function renderProfile () {
+
+                let html = ' ';
+            let result = document.querySelector(`#cred`);
+
+            html += `
+                <p>Username: ${sessionStorage.getItem("uname")}</p>
+                <p>First and Last name: ${sessionStorage.getItem("fname")} + ${sessionStorage.getItem("lname")}</p>
+                <p>Email: ${sessionStorage.getItem("email")}</p>
+                `
+            result.innerHTML = html;
+            }
+            renderProfile ();
+            /* let html = ' ';
             let result = document.querySelector(`#cred`);
 
             html += `
@@ -91,16 +107,16 @@ h1{
                 <p>First and Last name: ${docSnap.data().fname} + ${docSnap.data().lname}</p>
                 <p>Email: ${email}</p>
                 `
-            result.innerHTML = html;
+            result.innerHTML = html; */
 
-        async function getMessage () {
+        /* async function getMessage () {
             
             const messageRef = collection (db, "message", `${docSnap.data().uname}` );
             const q = await getDocs (messageRef);
             const message = [];
             querySnapshot.forEach((doc) => {
                 message.push(doc.data());
-            }
+            });
             renderMessage (message);
         }
 
@@ -119,7 +135,7 @@ h1{
             }
             messageBox.innerHTML = html;
         }
-        getMessage();
+        getMessage(); */
 
     </script>
 </body>

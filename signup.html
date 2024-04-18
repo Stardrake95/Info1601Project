@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Sign Up</title>
+    <title>SignUp</title>
 </head>
 
 <style>
@@ -48,41 +48,57 @@ input{
             <input type="password" id="password" name="password" minlength="8" size="50" required><br>
 
             <input type="submit" onclick="window.location.href='login.html'" value = "Submit">
+            <button type="button" onclick="window.location.href='index.html'">Cancel</button>
    </form>
     </main>
 </body>
 <script src = "FirebaseConfig.js"></script>
-<script>
-import { doc, setDoc } from "firebase/firestore";
+<script type= "module">
+
+const form = document.getElementById("signup");
+
+form.addEventListener("submit",editProfile);
+
+    function editProfile () {
+
+        sessionStorage.setItem("fname",`${form.fname.value}`);
+        sessionStorage.setItem("lname",`${form.lname.value}`);
+        sessionStorage.setItem("uname",`${form.uname.value}`);
+        sessionStorage.setItem("email",`${form.email.value}`);
+
+        console.log(sessionStorage.getItem("fname"));
+        
+};
+
+
+/* import { doc, setDoc } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 const db = getFirestore(firebaseApp);
-const form = document.querySelector('#signup');
 
 const auth = getAuth(firebaseApp);
-createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
 
 
-    form.addEventListener('submit', (e) => {
-        e.preventdefault();
-        await setDoc(doc(db, "profile", `${form.email.value}`), {
+
+const form = document.getElementById("signup");
+    form.addEventListener("submit", submitAuth)
+
+    async function submitAuth (event) {
+
+      
+      await setDoc(doc(db, "profile", `${form.email.value}`), {
           fname: form.fname.value,
           lname: form.lname.value,
           email: form.email.value,
           uname: form.uname.value   
         });
-    });
+        const uCred =  createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
+        
     form.fname.value = '';
     form.lname.value = '';
     form.email.value = '';
     form.uname.value = '';
+    };
+    */
 </script>   
 </html>
