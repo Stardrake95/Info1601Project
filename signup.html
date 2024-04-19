@@ -52,37 +52,38 @@ input{
     </main>
 </body>
 <script src = "FirebaseConfig.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js"></script>
+<script src="FirebaseConfig.js"></script>
 <script>
-import { doc, setDoc } from "firebase/firestore";
-const db = getFirestore(firebaseApp);
-const form = document.querySelector('#signup');
+    const { getFirestore, doc, setDoc } = firebase.firestore;
+    const { getAuth, createUserWithEmailAndPassword } = firebase.auth;
+    const db = getFirestore();
+    const form = document.querySelector('#signup');
+    const auth = getAuth();
 
-const auth = getAuth(firebaseApp);
-createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-
-
-    form.addEventListener('submit', (e) => {
-        e.preventdefault();
-        await setDoc(doc(db, "profile", `${form.email.value}`), {
-          fname: form.fname.value,
-          lname: form.lname.value,
-          email: form.email.value,
-          uname: form.uname.value   
-        });
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, form.email.value, form.password.value);
+            const user = userCredential.user;
+            await setDoc(doc(db, "profile", `${form.email.value}`), {
+                fname: form.fname.value,
+                lname: form.lname.value,
+                email: form.email.value,
+                uname: form.uname.value   
+            });
+            form.fname.value = '';
+            form.lname.value = '';
+            form.email.value = '';
+            form.uname.value = '';
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorMessage);
+        }
     });
-    form.fname.value = '';
-    form.lname.value = '';
-    form.email.value = '';
-    form.uname.value = '';
-</script>   
+</script>
+
 </html>
