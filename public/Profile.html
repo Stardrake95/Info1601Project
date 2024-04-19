@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profi</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<style>
+header{
+    padding-bottom: 100px;
+}
+
+#post {
+    margin-right: 1250px;
+    padding-top: 15px;
+    color: aliceblue;
+
+}
+p{
+    color: aliceblue;
+}
+
+#imageContainer{
+    padding:10px;
+}
+h1{
+    text-align: center;
+}
+
+#links{
+    background-color: aliceblue;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+#main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 2em;
+}
+#cred {
+    grid-row: 1 / 8;
+    grid-column: 1 / 3;
+    background-color: bisque;
+    padding: 5px;
+}
+#messageBox{
+    grid-row: 1 / 8;
+    grid-template-columns: 3 / 8;
+    background-color: bisque;
+}
+
+</style>
+
+<body>
+    <div id="logo">
+        WishMatch
+    </div>
+
+    <header>
+        <h1>Profile</h1>
+        <div id="links"> 
+    <input type="submit" onclick="window.location.href='explore.html'" value = "Explore">
+    <input type="submit" onclick="window.location.href='Profile.html'" value = "Profile">
+    <input type="submit" onclick="window.location.href='index.html'" value = "Main Page">
+</div>
+        
+    </header>
+<main>
+    <div id="main">
+        <div id = "cred">
+            <div>
+                <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+                <button><label for="file" style="cursor: pointer;">Upload Image</label></button>
+                <div id="imageContainer"></div>
+            </div>
+            <div id="cred-info">
+
+            </div>
+        </div>
+        <div id = "messageBox">
+            <h1>Inbox</h1>
+            <div id = "message-container">
+
+            </div>
+        </div>
+        
+
+    </div>
+</main>
+    <script>
+        var loadFile = function(event) {
+            var imageContainer = document.getElementById('imageContainer');
+            
+            var image = document.createElement('img');
+            image.width = 200;
+            image.height = 200;
+            image.src = URL.createObjectURL(event.target.files[0]);
+            
+            imageContainer.appendChild(image);
+        };
+    </script>
+    <script type = "module">
+    
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { doc, getDoc, collection, getFirestore } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+        const firebaseApp = initializeApp ({
+    apiKey: "AIzaSyBFPDSlVYKiW1mpKCbGYZiN94qF_WPg-9g",
+    authDomain: "info1601-grproject.firebaseapp.com",
+    projectId: "info1601-grproject",
+    storageBucket: "info1601-grproject.appspot.com",
+    messagingSenderId: "48425542087",
+    appId: "1:48425542087:web:6e6dac09cb7da63da4b9e2",
+    measurementId: "G-T83E3K6DDE"
+});
+        const db = getFirestore(firebaseApp);
+
+            async function loadProfile () {
+
+                const email = sessionStorage.getItem("email");
+                const profileRef = doc(db, "Profile", `${email}` );
+                const profileSnap = await getDoc(profileRef);
+
+                renderProfile (profileSnap.data());
+            }
+            
+            function renderProfile ( profile ) {
+
+                let html = ' ';
+            let result = document.querySelector(`#cred-info`);
+
+            html += `
+                <p>Username: ${profile.data().uname}</p>
+                <p>First and Last name: ${profile.data().fname} + ${profile.data().lname}</p>
+                <p>Email: ${profile.data().email}</p>
+                `
+            result.innerHTML = html;
+            }
+            loadProfile ();
+
+            async function getMessage () {
+            
+            const messageRef = collection (db, "message", `${profileSnap.data().uname}` );
+            const q = await getDocs (messageRef);
+            const message = [];
+            querySnapshot.forEach((doc) => {
+                message.push(doc.data());
+            });
+            renderMessage (message);
+        }
+
+        async function renderMessage (message) {
+
+            let messageBox = document.querySelector("#message-container")
+            let html = ' ';
+            for (let msg of message) {
+                html += `
+                <div class = "msg">
+                <p>Sender: ${message.sender}</p>
+                <p>Message: ${message.message}</p>
+                <input type="submit" onclick="window.location.href='contact.html'" value = "Contact">
+                </div>
+                `;
+            }
+            messageBox.innerHTML = html;
+        }
+        getMessage();
+            /* let html = ' ';
+            let result = document.querySelector(`#cred`);
+
+            html += `
+                <p>Username: ${docSnap.data().uname}</p>
+                <p>First and Last name: ${docSnap.data().fname} + ${docSnap.data().lname}</p>
+                <p>Email: ${email}</p>
+                `
+            result.innerHTML = html; */
+
+        /*  */
+
+    </script>
+</body>
+</html>

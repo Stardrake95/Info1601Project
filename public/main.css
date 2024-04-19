@@ -1,0 +1,15 @@
+body{
+  background-image: url('https://img.freepik.com/free-vector/set-basic-doodle-arrows_78370-1785.jpg');
+    background-size: cover;
+}
+
+h2 {text-align: center;}
+
+#logo{
+    font-family: Brush Script MT;
+    text-align: center;
+    color: azure;
+    font-size: 100px;
+}
+
+
