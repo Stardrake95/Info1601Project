@@ -143,7 +143,10 @@ h1{
             loadProfile ();
 
             async function getMessage () {
-            
+
+            const email = sessionStorage.getItem("email");
+                const profileRef = doc(db, "Profile", `${email}` );
+                const profileSnap = await getDoc(profileRef);
             const messageRef = collection (db, "message", `${profileSnap.data().uname}` );
             const q = await getDocs (messageRef);
             const message = [];
